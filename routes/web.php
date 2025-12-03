@@ -19,3 +19,21 @@ Route::get('/inscrire',function(){
 Route::get('/passwordforget',function(){
     return view('viewPasswordForget');
 })->name('passwordforget');
+
+use App\Http\Controllers\VisiteController;
+
+
+// Route::get('/', function () {
+//     // Quand tu vas sur http://127.0.0.1:8000
+//     // tu es redirigé vers la page d’enregistrement des visites
+//     // return redirect()->route('visites.create');
+// });
+
+// Formulaire d’enregistrement
+Route::get('/visites/create', [VisiteController::class, 'create'])->name('visites.create');
+
+// Traitement du formulaire
+Route::post('/visites', [VisiteController::class, 'store'])->name('visites.store');
+
+// Historique
+Route::get('/visites', [VisiteController::class, 'index'])->name('visites.index');
