@@ -9,7 +9,7 @@ class ControllerDashboard extends Controller
 {
     //
     function index(){
-        dd(Auth::user('role'));
+        // dd(Auth::user('role'));
         return view('viewDashboardClient');
     }
 }
