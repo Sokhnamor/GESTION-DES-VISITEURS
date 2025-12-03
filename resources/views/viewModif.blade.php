@@ -94,12 +94,12 @@
 <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-800">
 <h2 class="text-gray-900 dark:text-white text-lg font-bold">Détails 
     @if(isset($selectedClient))
-        de {{ $selectedClient->prenom}} {{$selectedClient->nom}}
+        de {{ $selectedClient->prenom}} {{$selectedClient->prenom}}
      @else
          du client
     @endif
 </h2>
-<a href="{{route('modifClient',['id'=>$selectedClient->id ?? 0])}}">
+<a href="">
 <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary/10 dark:bg-primary/20 text-primary gap-2 text-sm font-bold leading-normal tracking-[0.015em]">
 <span class="material-symbols-outlined text-base">edit</span>
 <span class="truncate">Modifier</span>
@@ -108,16 +108,11 @@
 </div>
 <!-- Tabs -->
 <div class="border-b border-gray-200 dark:border-gray-800">
-<nav aria-label="Tabs" class="flex gap-6 -mb-px px-4">
-<a class="shrink-0 border-b-2 border-primary px-1 py-3 text-sm font-bold text-primary" href="#">
-                                        Informations du Client
-                                    </a>
-<a class="shrink-0 border-b-2 border-transparent px-1 py-3 text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-700 dark:hover:text-gray-200" href="#">
-                                        Historique des Visites
-                                    </a>
-</nav>
+
 </div>
 <!-- Client Info Form -->
+ <form action="{{route('modifClientPost')}}" method="post">
+  @csrf
 <div class="p-6 grid grid-cols-2 gap-x-6 gap-y-5">
 <div>
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="nom">nom</label>
@@ -140,6 +135,8 @@
 <input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="entreprise" readonly="" type="text" value="{{$selectedClient->entreprise ?? ' '}}"/>
 </div>
 </div>
+<button type="submit" class="flex m-6 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em]">Valider</button>
+ </form>
 </div>
 </div>
 </div>
