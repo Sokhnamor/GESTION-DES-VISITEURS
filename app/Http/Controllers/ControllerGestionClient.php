@@ -10,7 +10,7 @@ class ControllerGestionClient extends Controller
     //
     
    function index(Request $request){
-    $clients=client::all();
+    $clients=client::orderBy('id','desc')->get();
     $id=$request->has('id')?$request->input('id'):null;
     $selectedClient=client::find($id);
     return view('viewGestionClient',['clients'=>$clients,'selectedClient'=>$selectedClient]);

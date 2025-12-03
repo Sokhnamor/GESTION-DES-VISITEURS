@@ -92,9 +92,10 @@
 <div class="bg-white dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800">
 <!-- SectionHeader -->
 <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-800">
-<h2 class="text-gray-900 dark:text-white text-lg font-bold">Détails 
+<h2 class="text-gray-900 dark:text-white text-lg font-bold">
+     Details
     @if(isset($selectedClient))
-        de {{ $selectedClient->prenom}} {{$selectedClient->prenom}}
+        de {{ $selectedClient->prenom}} {{$selectedClient->nom}}
      @else
          du client
     @endif
@@ -111,28 +112,28 @@
 
 </div>
 <!-- Client Info Form -->
- <form action="{{route('modifClientPost')}}" method="post">
+ <form action="{{route('modifClientPost',['id'=>$selectedClient->id])}}" method="post">
   @csrf
 <div class="p-6 grid grid-cols-2 gap-x-6 gap-y-5">
 <div>
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="nom">nom</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="nom" readonly="" type="text" value="{{$selectedClient->nom ?? ' '}}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="nom"  name="nom" type="text" value="{{$selectedClient->nom ?? ' '}}"/>
 </div>
 <div>
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="prenom">Prénom</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="prenom" readonly="" type="text" value="{{$selectedClient->prenom ?? ' ' }}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="prenom" name="prenom"  type="text" value="{{$selectedClient->prenom ?? ' ' }}"/>
 </div>
 <div>
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="telephone">Téléphone</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="telephone" readonly="" type="tel" value="{{$selectedClient->telephone ?? ' '}}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="telephone" name="telephone"  type="tel" value="{{$selectedClient->telephone ?? ' '}}"/>
 </div>
 <div>
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="email">Email</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="email" readonly="" type="email" value="{{$selectedClient->email ?? ' '}}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="email" name="email"  type="email" value="{{$selectedClient->email ?? ' '}}"/>
 </div>
 <div class="col-span-2">
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="entreprise">Entreprise</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="entreprise" readonly="" type="text" value="{{$selectedClient->entreprise ?? ' '}}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="entreprise" name="entreprise"  type="text" value="{{$selectedClient->entreprise ?? ' '}}"/>
 </div>
 </div>
 <button type="submit" class="flex m-6 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em]">Valider</button>

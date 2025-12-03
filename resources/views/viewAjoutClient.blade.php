@@ -91,24 +91,37 @@
   @csrf
 <div class="p-6 grid grid-cols-2 gap-x-6 gap-y-5">
 <div>
+    @error('nom')
+        <div class="text-red-600 text-sm mb-2">{{ $message }}</div>
+    @enderror
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="nom">nom</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="nom" readonly="" name="nom" type="text" value="{{old('nom')}}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="nom"   name="nom" type="text" value="{{old('nom')}}"/>
 </div>
 <div>
+     @error('prenom')
+        <div class="text-red-600 text-sm mb-2">{{ $message }}</div>
+    @enderror
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="prenom">Prénom</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="prenom" name="prenom" readonly="" type="text" value="{{old('prenom')}}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="prenom" name="prenom"   type="text" value="{{old('prenom')}}"/>
 </div>
 <div>
+     @error('telephone')
+        <div class="text-red-600 text-sm mb-2">{{ $message }}</div>
+    @enderror
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="telephone">Téléphone</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="telephone" name="telephone" readonly="" type="tel" value="{{old('telephone')}}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="telephone" name="telephone"   type="tel" value="{{old('telephone')}}"/>
 </div>
 <div>
+     @error('email')
+        <div class="text-red-600 text-sm mb-2">{{ $message }}</div>
+    @enderror
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="email">Email</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="email" readonly="" type="email" name="email" value="{{old('email')}}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="email"   type="email" name="email" value="{{old('email')}}"/>
 </div>
 <div class="col-span-2">
+    
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="entreprise">Entreprise</label>
-<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="entreprise" readonly="" name="entreprise" type="text" value="{{old('entreprise')}}"/>
+<input class="form-input mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm" id="entreprise"   name="entreprise" type="text" value="{{old('entreprise')}}"/>
 </div>
 </div>
 <button type="submit" class="flex m-6 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em]">Valider</button>
