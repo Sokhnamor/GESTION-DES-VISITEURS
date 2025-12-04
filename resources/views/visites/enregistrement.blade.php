@@ -93,7 +93,7 @@
 </label>
 <label class="flex flex-col">
 <p class="text-base font-medium leading-normal pb-2 dark:text-white/90">Heure d'Arrivée</p>
-<input name="heure_arrivée" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d121b] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 h-12 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 text-base font-normal leading-normal" type="datetime-local" value="2023-10-27T10:30"/>
+<input name="heure_arrivee" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d121b] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-slate-800 h-12 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-3 text-base font-normal leading-normal" type="datetime-local" value="2023-10-27T10:30"/>
 </label>
 <button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-primary text-white gap-2 text-base font-bold leading-normal tracking-[0.015em] mt-4 hover:bg-primary/90 transition-colors">
 <span class="material-symbols-outlined">login</span>

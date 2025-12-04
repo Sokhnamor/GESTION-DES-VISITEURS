@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Visite;
 use Illuminate\Http\Request;
+use App\Models\client;
 
 class VisiteController extends Controller
 {
@@ -24,12 +25,14 @@ class VisiteController extends Controller
         ]);
 
         // 2) Par défaut, la visite est "en cours", heure_depart = null
+        $client =client::find(1); // À adapter selon le client connecté
         $data['statut'] = 'en_cours';
         $data['heure_depart'] = null;
-        $data['client_id'] = 1; // À adapter selon le client connecté
+        // $data['client_id'] = 1; // À adapter selon le client connecté   
+        $client ->visites()->create($data);
 
         // 3) Insertion en base
-        Visite::create($data);
+        // Visite::create($data);
 
         // 4) Redirection vers le formulaire avec message
         return redirect()

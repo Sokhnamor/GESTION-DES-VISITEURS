@@ -53,7 +53,7 @@
 <span class="material-symbols-outlined text-[#0d121b] dark:text-white">dashboard</span>
 <p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Dashboard</p>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="#">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="{{ route('gestionclient') }}">
 <span class="material-symbols-outlined text-[#0d121b] dark:text-white">group</span>
 <p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Clients</p>
 </a>
@@ -133,7 +133,7 @@
     @forelse($visites as $visite)
         <tr class="border-t border-t-[#cfd7e7] dark:border-t-[#2a3140] hover:bg-[#f8f9fc] dark:hover:bg-black/20 transition-colors">
             <td class="h-[72px] p-4 text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">
-                {{ $visite->heure_arrivee ? $visite->heure_arrivee->format('Y-m-d H:i') : '-' }}
+                {{ $visite->heure_arrivee }}
             </td>
             <td class="h-[72px] p-4 text-[#0d121b] dark:text-white text-sm font-normal leading-normal">
                 {{ $visite->nom_visiteur }}
