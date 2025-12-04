@@ -10,7 +10,7 @@
 <span class="material-symbols-outlined font-bold text-primary">group</span>
 <p class="text-primary text-sm font-bold">Clients</p>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="{{route('visites.create')}}">
 <span class="material-symbols-outlined text-gray-900 dark:text-white">calendar_today</span>
 <p class="text-sm font-medium">Visites</p>
 </a>
@@ -112,7 +112,7 @@
 <a class="shrink-0 border-b-2 border-primary px-1 py-3 text-sm font-bold text-primary" href="#">
                                         Informations du Client
                                     </a>
-<a class="shrink-0 border-b-2 border-transparent px-1 py-3 text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-700 dark:hover:text-gray-200" href="#">
+<a class="shrink-0 border-b-2 border-transparent px-1 py-3 text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-700 dark:hover:text-gray-200" href="{{ route("visites.index") }}">
                                         Historique des Visites
                                     </a>
 </nav>

@@ -10,7 +10,7 @@
 <span class="material-symbols-outlined font-bold text-gray-900 dark:text-white">group</span>
 <p class=" text-sm font-medium">Clients</p>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="{{route('visites.create')}}">
 <span class="material-symbols-outlined text-gray-900 dark:text-white">calendar_today</span>
 <p class="text-sm font-medium">Visites</p>
 </a>
