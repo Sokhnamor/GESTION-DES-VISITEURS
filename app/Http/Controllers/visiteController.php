@@ -10,7 +10,13 @@ class VisiteController extends Controller
 {
     public function create()
     {
-        return view('visites.enregistrement');
+        // return view('visites.enregistrement');
+         // On récupère les 5 dernières visites
+        $recentVisites = Visite::orderByDesc('created_at')
+            ->limit(7)
+            ->get();
+
+        return view('visites.enregistrement', compact('recentVisites'));
     }
 
     public function store(Request $request)
@@ -40,11 +46,27 @@ class VisiteController extends Controller
             ->with('success', 'Visite enregistrée avec succès.');
     }
 
+   
     public function index()
-    {
-        // Récupérer toutes les visites, les plus récentes d'abord
-        $visites = Visite::orderByDesc('created_at')->get();
+{
+    // 5 visites par page (change le nombre si tu veux)
+    $visites = \App\Models\Visite::orderByDesc('created_at')->paginate(5);
 
-        return view('visites.historique', compact('visites'));
-    }
+    return view('visites.historique', compact('visites'));
+}
+
+
+
+    public function enregistrerDepart($id)
+{
+    $visite = Visite::findOrFail($id);
+
+    // Mise à jour du départ
+    $visite->update([
+        'heure_depart' => now(),
+        'statut' => 'terminee'
+    ]);
+
+    return back()->with('success', 'Départ enregistré avec succès.');
+}
 }

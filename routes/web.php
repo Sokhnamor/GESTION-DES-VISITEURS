@@ -37,3 +37,9 @@ Route::post('/visites', [VisiteController::class, 'store'])->name('visites.store
 
 // Historique
 Route::get('/visites', [VisiteController::class, 'index'])->name('visites.index');
+
+// Enregistrer le départ d’une visite
+Route::post('/visites/{id}/depart', [VisiteController::class, 'enregistrerDepart'])
+    ->name('visites.depart');
+
+

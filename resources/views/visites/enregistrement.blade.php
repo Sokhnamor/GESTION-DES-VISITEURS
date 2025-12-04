@@ -123,62 +123,57 @@
 </tr>
 </thead>
 <tbody class="dark:text-white/90">
-<tr class="border-b border-slate-200 dark:border-slate-800">
-<td class="p-3 font-medium">Amina Diop</td>
-<td class="p-3">Moussa Fall</td>
-<td class="p-3">10:30</td>
-<td class="p-3">-</td>
-<td class="p-3">
-<span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/50 px-2.5 py-1 text-xs font-medium text-green-800 dark:text-green-300">
-<span class="size-2 rounded-full bg-green-500"></span>
-                                                    En cours
-                                                </span>
-</td>
-<td class="p-3">
-<button class="flex items-center justify-center text-sm font-medium text-primary hover:text-primary/80">Enregistrer le Départ</button>
-</td>
-</tr>
-<tr class="border-b border-slate-200 dark:border-slate-800">
-<td class="p-3 font-medium">Babacar Ndiaye</td>
-<td class="p-3">Fatou Sene</td>
-<td class="p-3">09:45</td>
-<td class="p-3">-</td>
-<td class="p-3">
-<span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/50 px-2.5 py-1 text-xs font-medium text-green-800 dark:text-green-300">
-<span class="size-2 rounded-full bg-green-500"></span>
-                                                    En cours
-                                                </span>
-</td>
-<td class="p-3">
-<button class="flex items-center justify-center text-sm font-medium text-primary hover:text-primary/80">Enregistrer le Départ</button>
-</td>
-</tr>
-<tr class="border-b border-slate-200 dark:border-slate-800">
-<td class="p-3 font-medium">Issa Gueye</td>
-<td class="p-3">Ousmane Diallo</td>
-<td class="p-3">09:15</td>
-<td class="p-3">10:05</td>
-<td class="p-3">
-<span class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-1 text-xs font-medium text-slate-800 dark:text-slate-300">
-<span class="size-2 rounded-full bg-slate-500"></span>
-                                                    Terminée
-                                                </span>
-</td>
-<td class="p-3"></td>
-</tr>
-<tr class="border-b border-slate-200 dark:border-slate-800">
-<td class="p-3 font-medium">Mariama Ba</td>
-<td class="p-3">Alioune Sow</td>
-<td class="p-3">08:50</td>
-<td class="p-3">09:30</td>
-<td class="p-3">
-<span class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-1 text-xs font-medium text-slate-800 dark:text-slate-300">
-<span class="size-2 rounded-full bg-slate-500"></span>
-                                                    Terminée
-                                                </span>
-</td>
-<td class="p-3"></td>
-</tr>
+<tbody class="dark:text-white/90">
+    @forelse($recentVisites as $visite)
+        <tr class="border-b border-slate-200 dark:border-slate-800">
+            <td class="p-3 font-medium">
+                {{ $visite->nom_visiteur }}
+            </td>
+            <td class="p-3">
+                {{ $visite->personne_rencontree ?? '-' }}
+            </td>
+            <td class="p-3">
+                {{-- On affiche l’heure d’arrivée brute, simple --}}
+                {{ $visite->heure_arrivee ?? '-' }}
+            </td>
+            <td class="p-3">
+                {{ $visite->heure_depart ?? '-' }}
+            </td>
+            <td class="p-3">
+                @if($visite->statut === 'en_cours')
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/50 px-2.5 py-1 text-xs font-medium text-green-800 dark:text-green-300">
+                        <span class="size-2 rounded-full bg-green-500"></span>
+                        En cours
+                    </span>
+                @else
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-1 text-xs font-medium text-slate-800 dark:text-slate-300">
+                        <span class="size-2 rounded-full bg-slate-500"></span>
+                        Terminée
+                    </span>
+                @endif
+            </td>
+            <td class="p-3">
+                {{-- Bouton qu’on branchera après sur "Enregistrer le départ" --}}
+                @if($visite->statut === 'en_cours')
+                    <form action="{{ route('visites.depart', $visite->id) }}" method="POST">
+                         @csrf
+                            <button class="flex items-center justify-center text-sm font-medium text-primary hover:text-primary/80">
+                                Enregistrer le Départ
+                             </button>
+                    </form>
+
+                @endif
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="6" class="p-3 text-center text-sm text-slate-500 dark:text-slate-400">
+                Aucune visite enregistrée pour le moment.
+            </td>
+        </tr>
+    @endforelse
+</tbody>
+
 </tbody>
 </table>
 </div>

@@ -144,7 +144,7 @@
             <td class="h-[72px] p-4 text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">
                 {{ $visite->personne_rencontree ?? '-' }}
             </td>
-            <td class="h-[72px] p-4 text-primary text-sm font-bold leading-normal tracking-[0.015em] cursor-pointer hover:underline">
+             <td class="h-[72px] p-4 text-primary text-sm font-bold leading-normal tracking-[0.015em] cursor-pointer hover:underline">
                 Voir le rapport
             </td>
         </tr>
@@ -162,19 +162,66 @@
 </div>
 </div>
 <!-- Pagination -->
-<div class="flex items-center justify-center p-4 mt-4">
-<a class="flex size-10 items-center justify-center text-[#0d121b] dark:text-white rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140] transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">chevron_left</span>
-</a>
-<a class="text-sm font-bold leading-normal tracking-[0.015em] flex size-10 items-center justify-center text-white rounded-lg bg-primary" href="#">1</a>
-<a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#0d121b] dark:text-white rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140] transition-colors" href="#">2</a>
-<a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#0d121b] dark:text-white rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140] transition-colors" href="#">3</a>
-<span class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#0d121b] dark:text-white rounded-lg">...</span>
-<a class="text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#0d121b] dark:text-white rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140] transition-colors" href="#">10</a>
-<a class="flex size-10 items-center justify-center text-[#0d121b] dark:text-white rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140] transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">chevron_right</span>
-</a>
-</div>
+
+@if($visites->hasPages())
+
+    <div class="flex items-center justify-center p-4 mt-4">
+
+        {{-- Bouton précédent --}}
+        @if ($visites->onFirstPage())
+            <!-- Désactivé -->
+            <span class="flex size-10 items-center justify-center opacity-40 cursor-default">
+                <span class="material-symbols-outlined text-lg">chevron_left</span>
+            </span>
+        @else
+            <!-- Aller à la page précédente -->
+            <a href="{{ $visites->previousPageUrl() }}"
+               class="flex size-10 items-center justify-center hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140]">
+                <span class="material-symbols-outlined text-lg">chevron_left</span>
+            </a>
+        @endif
+
+
+
+        {{-- Numéros des pages --}}
+        @for ($page = 1; $page <= $visites->lastPage(); $page++)
+
+            {{-- Page active --}}
+            @if ($page == $visites->currentPage())
+                <span class="flex size-10 items-center justify-center text-white rounded-lg bg-primary">
+                    {{ $page }}
+                </span>
+
+            {{-- Autres pages --}}
+            @else
+                <a href="{{ $visites->url($page) }}"
+                   class="flex size-10 items-center justify-center hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140]">
+                    {{ $page }}
+                </a>
+            @endif
+
+        @endfor
+
+
+
+        {{-- Bouton suivant --}}
+        @if ($visites->hasMorePages())
+            <!-- Aller à la page suivante -->
+            <a href="{{ $visites->nextPageUrl() }}"
+               class="flex size-10 items-center justify-center hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140]">
+                <span class="material-symbols-outlined text-lg">chevron_right</span>
+            </a>
+        @else
+            <!-- Désactivé -->
+            <span class="flex size-10 items-center justify-center opacity-40 cursor-default">
+                <span class="material-symbols-outlined text-lg">chevron_right</span>
+            </span>
+        @endif
+
+    </div>
+
+@endif
+
 </div>
 </main>
 </div>
