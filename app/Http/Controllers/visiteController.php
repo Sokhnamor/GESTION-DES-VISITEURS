@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Visite;
 use Illuminate\Http\Request;
 use App\Models\client;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
 
 class VisiteController extends Controller
 {
@@ -38,7 +41,7 @@ class VisiteController extends Controller
         $client ->visites()->create($data);
 
         // 3) Insertion en base
-        // Visite::create($data);
+      
 
         // 4) Redirection vers le formulaire avec message
         return redirect()
@@ -69,4 +72,36 @@ class VisiteController extends Controller
 
     return back()->with('success', 'Départ enregistré avec succès.');
 }
+//voir rapport
+public function show($id)
+{
+    $visite = Visite::findOrFail($id);
+
+    return view('visites.rapport', compact('visite'));
 }
+
+
+public function exportPdf($id)
+{
+    $visite = Visite::findOrFail($id);
+
+    // On utilise une vue spéciale pour le PDF (plus simple, sans JS)
+    $pdf = Pdf::loadView('visites.rapport-pdf', compact('visite'));
+
+    // Nom du fichier PDF
+    $fileName = 'rapport_visite_'.$visite->id.'.pdf';
+
+    return $pdf->download($fileName);
+}
+
+public function parametres()
+{
+    return view('visites.parametres');
+}
+
+
+
+}
+
+
+

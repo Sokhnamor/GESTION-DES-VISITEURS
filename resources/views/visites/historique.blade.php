@@ -61,18 +61,18 @@
 <span class="material-symbols-outlined text-primary dark:text-white" style="font-variation-settings: 'FILL' 1;">history</span>
 <p class="text-primary dark:text-white text-sm font-bold leading-normal">Historique des Visites</p>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="#">
+{{-- <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="{{ route('visites.index') }}">
 <span class="material-symbols-outlined text-[#0d121b] dark:text-white">bar_chart</span>
 <p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Rapports</p>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="#">
+</a> --}}
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="{{ route('visites.parametres') }}">
 <span class="material-symbols-outlined text-[#0d121b] dark:text-white">toggle_on</span>
 <p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Paramètres</p>
 </a>
 </nav>
 </div>
 <div class="flex flex-col gap-1">
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="#">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="{{ route('connexion') }}">
 <span class="material-symbols-outlined text-[#0d121b] dark:text-white">logout</span>
 <p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Déconnexion</p>
 </a>
@@ -115,6 +115,9 @@
 <span class="material-symbols-outlined text-lg">arrow_drop_down</span>
 </button>
 </div>
+
+{{-- FORMULAIRE DE RECHERCHE --}}
+
 <!-- Table -->
 <div class="bg-white dark:bg-[#181f2c] rounded-xl border border-[#e7ebf3] dark:border-[#2a3140] overflow-hidden">
 <div class="overflow-x-auto">
@@ -144,9 +147,13 @@
             <td class="h-[72px] p-4 text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">
                 {{ $visite->personne_rencontree ?? '-' }}
             </td>
-             <td class="h-[72px] p-4 text-primary text-sm font-bold leading-normal tracking-[0.015em] cursor-pointer hover:underline">
-                Voir le rapport
+            <td class="h-[72px] p-4">
+                <a href="{{ route('visites.show', $visite->id) }}"
+                   class="text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:underline">
+                    Voir le rapport
+                </a>
             </td>
+
         </tr>
     @empty
         <tr>
