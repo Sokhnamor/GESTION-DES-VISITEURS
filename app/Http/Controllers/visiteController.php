@@ -50,7 +50,7 @@ class VisiteController extends Controller
     public function index()
 {
     // 5 visites par page (change le nombre si tu veux)
-    $visites = \App\Models\Visite::orderByDesc('created_at')->paginate(5);
+    $visites = Visite::orderByDesc('created_at')->paginate(5);
 
     return view('visites.historique', compact('visites'));
 }
