@@ -61,14 +61,18 @@
 <span class="material-symbols-outlined text-primary dark:text-white" style="font-variation-settings: 'FILL' 1;">history</span>
 <p class="text-primary dark:text-white text-sm font-bold leading-normal">Historique des Visites</p>
 </a>
-{{-- <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="{{ route('visites.index') }}">
-<span class="material-symbols-outlined text-[#0d121b] dark:text-white">bar_chart</span>
-<p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Rapports</p>
-</a> --}}
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="{{ route('visites.parametres') }}">
+{{-- <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="{{ route('visites.parametres') }}">
 <span class="material-symbols-outlined text-[#0d121b] dark:text-white">toggle_on</span>
 <p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Paramètres</p>
+</a> --}}
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors"
+    href="{{ route('visites.parametres') }}"
+    target="_blank"
+    rel="noopener noreferrer">
+    <span class="material-symbols-outlined text-[#0d121b] dark:text-white">toggle_on</span>
+    <p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Paramètres</p>
 </a>
+
 </nav>
 </div>
 <div class="flex flex-col gap-1">
@@ -149,10 +153,13 @@
             </td>
             <td class="h-[72px] p-4">
                 <a href="{{ route('visites.show', $visite->id) }}"
-                   class="text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:underline">
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:underline">
                     Voir le rapport
                 </a>
             </td>
+
 
         </tr>
     @empty
