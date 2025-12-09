@@ -24,11 +24,7 @@ Route::get('/passwordforget',function(){
 
 
 
-// Route::get('/', function () {
-//     // Quand tu vas sur http://127.0.0.1:8000
-//     // tu es redirigé vers la page d’enregistrement des visites
-//     // return redirect()->route('visites.create');
-// });
+
 
 // Formulaire d’enregistrement
 Route::get('/visites/create', [VisiteController::class, 'create'])->name('visites.create');
