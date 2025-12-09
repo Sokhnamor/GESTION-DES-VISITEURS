@@ -14,12 +14,13 @@ class ControllerDashboard extends Controller
         $vistes = $this->getNumbervisiteurActuelJourWeek();
         $visiteursParJour = $this->getNumberVisiteurForEachDayOfWeek();
         //cette variable recupere le nombre de visiteur des 3 derniers mois et les points pour le graphique
-        $visiteurThreeLastMonths = $this->getThe3LastMonthsVisteur();
+        $visiteurThreeLastMonths = $this->getTheThreeLastMonthsVisteur();
         return view('viewDashboardClient', ['visites' => $vistes, 'visiteursParJour' => $visiteursParJour,'visiteurThreeLastMonths'=>$visiteurThreeLastMonths]);
     }
 
     public function getNumbervisiteurActuelJourWeek()
     {
+        $visiteurTotal = visite::count();
         $visiteurActuel = visite::whereDate('created_at', now()->toDateString())->where('statut', 'en_cours')->count();
         //ici je recupere le nombre de visiteur du jour qui ont terminer leur visite
         $visiteurJourFinish = visite::whereDate('created_at', now()->toDateString())->where('statut', 'terminee')->count();
@@ -33,6 +34,7 @@ class ControllerDashboard extends Controller
         $pourcentageActuel = $visiteurJourFinish > 0 ? (($visiteurActuel - $visiteurJourFinish) / $visiteurJourFinish) * 100 : 100;
         $pourcentageJour = $visiteurHier > 0 ? (($visiteurJour - $visiteurHier) / $visiteurHier) * 100 : 100;
         $pourcentageWeek = $visiteurLastWeek > 0 ? (($visiteurWeek - $visiteurLastWeek) / $visiteurLastWeek) * 100 : 100;
+        $tauxConversion =$visiteurActuel > 0 ?($visiteurTotal /$visiteurActuel) * 100 : 100;
 
         return [
             'visiteurActuel' => $visiteurActuel,
@@ -41,6 +43,7 @@ class ControllerDashboard extends Controller
             'pourcentageActuel' => round($pourcentageActuel, 2),
             'pourcentageJour' => round($pourcentageJour, 2),
             'pourcentageWeek' => round($pourcentageWeek, 2),
+            'tauxConversion' => round($tauxConversion, 2),
         ];
     }
     function getNumberVisiteurForEachDayOfWeek()
@@ -58,7 +61,7 @@ class ControllerDashboard extends Controller
     }
 
     // cette fonction permet de recuperer le nombre de visiteur des 3 derniers mois et calculer les points pour le graphique
-    function getThe3LastMonthsVisteur()
+    function getTheThreeLastMonthsVisteur()
     {
         $visitesParMois = [];
 
@@ -70,9 +73,8 @@ class ControllerDashboard extends Controller
                 ->count();
             $visitesParMois[$mois] = $count;
         }
-
-        $avantDernierMois = array_values($visitesParMois)[1];
-        $DernierMois = array_values($visitesParMois)[2];
+        $avantDernierMois = array_values($visitesParMois)[1]; //avant dernier mois c'est par rapport au 3 derniers mois
+        $DernierMois = array_values($visitesParMois)[2];// dernier mois c'est par rapport au 3 derniers mois
         // je calcule le pourcentage d'evolution des visiteur des 3 derniers mois
         $pourcentageTroisMois = $avantDernierMois > 0 ? (($DernierMois - $avantDernierMois) / $avantDernierMois) * 100 : 100;
         $nbMois = count($visitesParMois);

@@ -29,7 +29,7 @@
 <p class="text-base font-normal text-gray-500 dark:text-gray-400">Aperçu des visites clients et des tendances.</p>
 </div>
 <!-- Chips -->
-<div class="flex gap-2">
+<!-- <div class="flex gap-2">
 <button class="flex h-9 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-white/10 pl-4 pr-3 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-white/20">
 <p class="text-sm font-medium text-gray-800 dark:text-gray-200">Aujourd'hui</p>
 <span class="material-symbols-outlined text-gray-500 dark:text-gray-400" style="font-size: 20px;">expand_more</span>
@@ -38,7 +38,7 @@
 <p class="text-sm font-medium text-gray-800 dark:text-gray-200">Cette semaine</p>
 <span class="material-symbols-outlined text-gray-500 dark:text-gray-400" style="font-size: 20px;">expand_more</span>
 </button>
-</div>
+</div> -->
 </div>
 <!-- Stats -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -62,7 +62,7 @@
 </div>
 <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800">
 <p class="text-base font-medium text-gray-600 dark:text-gray-400">Visites de la Semaine</p>
-<p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $visites['visiteurWeek']  }}</p>
+<p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $visites['visiteurWeek']}}</p>
 @if($visites['pourcentageWeek'] >0)
     <p class="text-base font-medium text-green-600 dark:text-green-500">+{{ $visites['pourcentageWeek'] }}%</p>
 @else
@@ -71,7 +71,7 @@
 </div>
 <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800">
 <p class="text-base font-medium text-gray-600 dark:text-gray-400">Taux de Conversion</p>
-<p class="text-3xl font-bold text-gray-900 dark:text-white">15%</p>
+<p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $visites['tauxConversion'] }}%</p>
 <p class="text-base font-medium text-green-600 dark:text-green-500">+1.2%</p>
 </div>
 </div>
