@@ -49,7 +49,11 @@
   {{Auth::user()->name}}
   @endauth
 </h1>
-<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Manager</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">
+  @auth
+  {{Auth::user()->role}}
+  @endauth
+</p>
 </div>
 @yield('dashnav')
 <div class="flex flex-col gap-1">

@@ -21,6 +21,7 @@ class ControllerConnexion extends Controller
     }
    function login(Request $request){
         $verify=Auth::attempt($request->only('email','password'));
+        // dd(Auth::user()['role']);
         if($verify){
             return redirect()->route('dashboard');
         }else{
