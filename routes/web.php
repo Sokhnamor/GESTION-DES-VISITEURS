@@ -6,6 +6,7 @@ use App\Http\Controllers\ControllerDashboard;
 use App\Http\Controllers\ControllerGestionClient;
 use App\Http\Controllers\ControllerModifClient;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VisiteController;
 
 Route::get('/',[ControllerConnexion::class,'index'])->name('connexion');
 Route::post('/login',[ControllerConnexion::class,'login'])->name('connexionPost');
@@ -27,14 +28,10 @@ Route::get('/passwordforget',function(){
     return view('viewPasswordForget');
 })->name('passwordforget');
 
-use App\Http\Controllers\VisiteController;
 
 
-// Route::get('/', function () {
-//     // Quand tu vas sur http://127.0.0.1:8000
-//     // tu es redirigé vers la page d’enregistrement des visites
-//     // return redirect()->route('visites.create');
-// });
+
+
 
 // Formulaire d’enregistrement
 Route::get('/visites/create', [VisiteController::class, 'create'])->name('visites.create');
@@ -48,6 +45,22 @@ Route::get('/visites', [VisiteController::class, 'index'])->name('visites.index'
 // Enregistrer le départ d’une visite
 Route::post('/visites/{id}/depart', [VisiteController::class, 'enregistrerDepart'])
     ->name('visites.depart');
+
+//Voir rappport
+Route::get('/visites/rapport/{id}', [VisiteController::class, 'show'])
+    ->name('visites.show');
+
+
+//Exporter en PDF
+Route::get('/visites/rapport/{id}', [VisiteController::class, 'show'])->name('visites.show');
+Route::get('/visites/rapport/{id}/pdf', [VisiteController::class, 'exportPdf'])->name('visites.pdf');
+
+
+Route::get('/visites', [VisiteController::class, 'index'])->name('visites.index'); // Rapport
+Route::get('/visites/parametres', [VisiteController::class, 'parametres'])->name('visites.parametres');  // Paramètres
+
+
+
 
 
 >>>>>>> mor

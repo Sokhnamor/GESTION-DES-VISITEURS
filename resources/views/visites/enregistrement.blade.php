@@ -60,7 +60,14 @@
 <div class="px-4 sm:px-6 md:px-10 flex flex-1 justify-center py-8">
 <div class="layout-content-container flex flex-col w-full">
 <div class="flex flex-wrap justify-between items-center gap-4 mb-8">
-<p class="text-4xl font-black leading-tight tracking-[-0.033em] min-w-72 dark:text-white">Enregistrement des Visites</p>
+ <p class="text-4xl font-black leading-tight tracking-[-0.033em] min-w-72 dark:text-white">Enregistrement des Visites</p>
+ <div class="flex justify-end mb-4">
+    <a href="{{ route('dashboard') }}"
+        class="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-sm hover:bg-primary/90 transition">
+        <span class="material-symbols-outlined text-white">arrow_back</span>
+          Retour
+    </a>
+</div>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 <!-- Left Column: Form -->
