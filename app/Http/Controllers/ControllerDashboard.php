@@ -31,10 +31,10 @@ class ControllerDashboard extends Controller
         $visiteurLastWeek = visite::whereBetween('created_at', [now()->subWeek()->startOfWeek(), now()->subWeek()->endOfWeek()])->count();
         $visiteurWeek = visite::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count();
         //ici je calcule le pourcentage pour savoir l'evolution des visiteur du jour entre ce qui sont deja parti et ceux qui sont encore present
-        $pourcentageActuel = $visiteurJourFinish > 0 ? (($visiteurActuel - $visiteurJourFinish) / $visiteurJourFinish) * 100 : 100;
-        $pourcentageJour = $visiteurHier > 0 ? (($visiteurJour - $visiteurHier) / $visiteurHier) * 100 : 100;
-        $pourcentageWeek = $visiteurLastWeek > 0 ? (($visiteurWeek - $visiteurLastWeek) / $visiteurLastWeek) * 100 : 100;
-        $tauxConversion =$visiteurActuel > 0 ?($visiteurTotal /$visiteurActuel) * 100 : 100;
+        $pourcentageActuel = $visiteurJourFinish > 0 ? (($visiteurActuel - $visiteurJourFinish) / $visiteurActuel) * 100 : 100;
+        $pourcentageJour = $visiteurHier > 0 ? (($visiteurJour - $visiteurHier) / $visiteurJour) * 100 : 100;
+        $pourcentageWeek = $visiteurLastWeek > 0 ? (($visiteurWeek - $visiteurLastWeek) / $visiteurWeek) * 100 : 100;
+        $tauxConversion =$visiteurActuel > 0 ?(($visiteurTotal - $visiteurActuel)/$visiteurTotal) * 100 : 100;
 
         return [
             'visiteurActuel' => $visiteurActuel,

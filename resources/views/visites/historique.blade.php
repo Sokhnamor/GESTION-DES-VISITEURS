@@ -44,8 +44,15 @@
 <div class="flex items-center gap-3 p-2">
 <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar for Kara SAMB" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDm31whziKfIledgo5A-QkgzjNJMm4j59XLAEZY--JWsHDN8jObyf0gAhqyFqRsDhY0wjY-RndwduAuI0lvnixEz9PD8BbOWtSSYTgQhmECQzOWDi9WT4rBCLXJmzWvQmWP9MOuM4K_muYGtEyyhiezn_ACPMTyfNMZedBytuikyQFkx_eAvPhyPXRha16Q-taoc2UHE_uTHQwalcL5jf7dFGVBZIJZnXpR42zCfusZ4AZK35LC8ZOFB4_u6i90j_5GODtYaDAaJQ");'></div>
 <div class="flex flex-col">
-<h1 class="text-[#0d121b] dark:text-white text-base font-medium leading-normal">Kara SAMB</h1>
-<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">Gestionnaire</p>
+<h1 class="text-[#0d121b] dark:text-white text-base font-medium leading-normal">
+    @if(Auth::check())
+    {{ Auth::user()->name }}</h1>
+    @endif
+<p class="text-[#4c669a] dark:text-[#a0aec0] text-sm font-normal leading-normal">
+    @if(Auth::check())
+    {{ Auth::user()->role }}</h1>
+    @endif
+</p>
 </div>
 </div>
 <nav class="flex flex-col gap-2 mt-4">
@@ -57,6 +64,12 @@
 <span class="material-symbols-outlined text-[#0d121b] dark:text-white">group</span>
 <p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Clients</p>
 </a>
+@if(Auth::user()->role=='admin')
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="{{route('utilisateurs')}}">
+<span class="material-symbols-outlined text-gray-900 dark:text-white">group</span>
+<p class="text-sm font-medium">Utilisateurs</p>
+</a>
+@endif
 <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 dark:bg-primary/30" href="#">
 <span class="material-symbols-outlined text-primary dark:text-white" style="font-variation-settings: 'FILL' 1;">history</span>
 <p class="text-primary dark:text-white text-sm font-bold leading-normal">Historique des Visites</p>

@@ -5,6 +5,7 @@ use App\Http\Controllers\ControllerConnexion;
 use App\Http\Controllers\ControllerDashboard;
 use App\Http\Controllers\ControllerGestionClient;
 use App\Http\Controllers\ControllerModifClient;
+use App\Http\Controllers\ControllerUser;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VisiteController;
 
@@ -28,7 +29,7 @@ Route::get('/passwordforget',function(){
 
 
 
-
+Route::get('/utilisateur',[ControllerUser::class,'index'])->name('utilisateurs')->middleware('authentification');
 
 
 // Formulaire d’enregistrement

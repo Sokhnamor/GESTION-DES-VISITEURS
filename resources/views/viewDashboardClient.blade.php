@@ -18,6 +18,12 @@
 <span class="material-symbols-outlined text-gray-900 dark:text-white">bar_chart</span>
 <p class="text-sm font-medium">Rapports</p>
 </a>
+@if(Auth::user()->role=='admin')
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="{{route('utilisateurs')}}">
+<span class="material-symbols-outlined text-gray-900 dark:text-white">group</span>
+<p class="text-sm font-medium">Utilisateurs</p>
+</a>
+@endif
 </nav>
 </div>
 @endsection
@@ -62,6 +68,7 @@
 </div>
 <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800">
 <p class="text-base font-medium text-gray-600 dark:text-gray-400">Visites de la Semaine</p>
+
 <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $visites['visiteurWeek']}}</p>
 @if($visites['pourcentageWeek'] >0)
     <p class="text-base font-medium text-green-600 dark:text-green-500">+{{ $visites['pourcentageWeek'] }}%</p>

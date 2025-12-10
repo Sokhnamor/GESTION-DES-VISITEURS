@@ -34,7 +34,7 @@ class VisiteController extends Controller
         ]);
 
         // 2) Par défaut, la visite est "en cours", heure_depart = null
-        $client =client::find(1); // À adapter selon le client connecté
+        $client =client::find(2); // À adapter selon le client connecté
         $data['statut'] = 'en_cours';
         $data['heure_depart'] = null;
         // $data['client_id'] = 1; // À adapter selon le client connecté   
