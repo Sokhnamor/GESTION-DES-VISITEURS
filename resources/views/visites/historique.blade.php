@@ -82,10 +82,8 @@
 </a>
 </div>
 </aside>
-<!-- Main Content -->
 <main class="flex-1 p-8 overflow-y-auto">
 <div class="max-w-7xl mx-auto">
-<!-- PageHeading -->
 <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
 <div class="flex flex-col">
 <h1 class="text-[#0d121b] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Historique des Visites</h1>
@@ -96,29 +94,169 @@
 <span class="truncate">Exporter</span>
 </button>
 </div>
-<!-- Chips / Filters -->
 <div class="flex flex-wrap gap-3 p-3 bg-white dark:bg-[#181f2c] rounded-xl border border-[#e7ebf3] dark:border-[#2a3140] mb-6">
-<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#e7ebf3] dark:bg-[#2a3140] pl-3 pr-2 text-[#0d121b] dark:text-white hover:bg-[#cfd7e7] dark:hover:bg-[#343a4a] transition-colors">
+<button onclick="openModal('modalClient')" class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#e7ebf3] dark:bg-[#2a3140] pl-3 pr-2 text-[#0d121b] dark:text-white hover:bg-[#cfd7e7] dark:hover:bg-[#343a4a] transition-colors cursor-pointer">
 <span class="material-symbols-outlined text-lg">person</span>
 <p class="text-sm font-medium leading-normal">Filtrer par Client</p>
 <span class="material-symbols-outlined text-lg">arrow_drop_down</span>
 </button>
-<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#e7ebf3] dark:bg-[#2a3140] pl-3 pr-2 text-[#0d121b] dark:text-white hover:bg-[#cfd7e7] dark:hover:bg-[#343a4a] transition-colors">
+
+<button onclick="openModal('modalDate')" class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#e7ebf3] dark:bg-[#2a3140] pl-3 pr-2 text-[#0d121b] dark:text-white hover:bg-[#cfd7e7] dark:hover:bg-[#343a4a] transition-colors cursor-pointer">
 <span class="material-symbols-outlined text-lg">calendar_month</span>
 <p class="text-sm font-medium leading-normal">Date de la visite</p>
 <span class="material-symbols-outlined text-lg">arrow_drop_down</span>
 </button>
-<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#e7ebf3] dark:bg-[#2a3140] pl-3 pr-2 text-[#0d121b] dark:text-white hover:bg-[#cfd7e7] dark:hover:bg-[#343a4a] transition-colors">
+
+<button onclick="openModal('modalMotif')" class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#e7ebf3] dark:bg-[#2a3140] pl-3 pr-2 text-[#0d121b] dark:text-white hover:bg-[#cfd7e7] dark:hover:bg-[#343a4a] transition-colors cursor-pointer">
 <span class="material-symbols-outlined text-lg">info</span>
 <p class="text-sm font-medium leading-normal">Motif de la visite</p>
 <span class="material-symbols-outlined text-lg">arrow_drop_down</span>
 </button>
-<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#e7ebf3] dark:bg-[#2a3140] pl-3 pr-2 text-[#0d121b] dark:text-white hover:bg-[#cfd7e7] dark:hover:bg-[#343a4a] transition-colors">
+
+<button onclick="openModal('modalPersonne')" class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#e7ebf3] dark:bg-[#2a3140] pl-3 pr-2 text-[#0d121b] dark:text-white hover:bg-[#cfd7e7] dark:hover:bg-[#343a4a] transition-colors cursor-pointer">
 <span class="material-symbols-outlined text-lg">groups</span>
 <p class="text-sm font-medium leading-normal">Personne rencontrée</p>
 <span class="material-symbols-outlined text-lg">arrow_drop_down</span>
 </button>
 </div>
+
+
+<div id="modalClient" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50" onclick="closeModalOnBackdrop(event, 'modalClient')">
+<div class="bg-white dark:bg-[#181f2c] rounded-xl p-6 max-w-sm w-full mx-4" onclick="event.stopPropagation()">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold text-[#0d121b] dark:text-white">Filtrer par Client</h2>
+<button onclick="closeModal('modalClient')" class="text-[#4c669a] dark:text-[#a0aec0] hover:text-[#0d121b] dark:hover:text-white">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form method="GET" action="{{ route('visites.index') }}" class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-[#0d121b] dark:text-white mb-2">Sélectionner un client</label>
+<select name="client_id" class="w-full px-3 py-2 border border-[#e7ebf3] dark:border-[#2a3140] rounded-lg bg-white dark:bg-[#101622] text-[#0d121b] dark:text-white text-sm">
+<option value="">-- Tous les clients --</option>
+@forelse($clients ?? [] as $client)
+<option value="{{ $client->id }}" {{ request('client_id') == $client->id ? 'selected' : '' }}>
+{{ $client->nom }} {{ $client->prenom ?? '' }}
+</option>
+@empty
+<option disabled>Aucun client disponible</option>
+@endforelse
+</select>
+</div>
+<div class="flex gap-2 pt-4">
+<button type="submit" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+Filtrer
+</button>
+<button type="button" onclick="closeModal('modalClient')" class="flex-1 px-4 py-2 border border-[#e7ebf3] dark:border-[#2a3140] text-[#0d121b] dark:text-white rounded-lg font-medium hover:bg-[#f8f9fc] dark:hover:bg-[#101622] transition-colors">
+Annuler
+</button>
+</div>
+</form>
+</div>
+</div>
+
+<div id="modalDate" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50" onclick="closeModalOnBackdrop(event, 'modalDate')">
+<div class="bg-white dark:bg-[#181f2c] rounded-xl p-6 max-w-sm w-full mx-4" onclick="event.stopPropagation()">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold text-[#0d121b] dark:text-white">Filtrer par Date</h2>
+<button onclick="closeModal('modalDate')" class="text-[#4c669a] dark:text-[#a0aec0] hover:text-[#0d121b] dark:hover:text-white">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form method="GET" action="{{ route('visites.index') }}" class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-[#0d121b] dark:text-white mb-2">Date de début</label>
+<input type="date" name="date_debut" value="{{ request('date_debut') }}" class="w-full px-3 py-2 border border-[#e7ebf3] dark:border-[#2a3140] rounded-lg bg-white dark:bg-[#101622] text-[#0d121b] dark:text-white text-sm">
+</div>
+<div>
+<label class="block text-sm font-medium text-[#0d121b] dark:text-white mb-2">Date de fin</label>
+<input type="date" name="date_fin" value="{{ request('date_fin') }}" class="w-full px-3 py-2 border border-[#e7ebf3] dark:border-[#2a3140] rounded-lg bg-white dark:bg-[#101622] text-[#0d121b] dark:text-white text-sm">
+</div>
+<div class="flex gap-2 pt-4">
+<button type="submit" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+Filtrer
+</button>
+<button type="button" onclick="closeModal('modalDate')" class="flex-1 px-4 py-2 border border-[#e7ebf3] dark:border-[#2a3140] text-[#0d121b] dark:text-white rounded-lg font-medium hover:bg-[#f8f9fc] dark:hover:bg-[#101622] transition-colors">
+Annuler
+</button>
+</div>
+</form>
+</div>
+</div>
+
+<!-- Modale: Motif de la visite -->
+<div id="modalMotif" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50" onclick="closeModalOnBackdrop(event, 'modalMotif')">
+<div class="bg-white dark:bg-[#181f2c] rounded-xl p-6 max-w-sm w-full mx-4" onclick="event.stopPropagation()">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold text-[#0d121b] dark:text-white">Filtrer par Motif</h2>
+<button onclick="closeModal('modalMotif')" class="text-[#4c669a] dark:text-[#a0aec0] hover:text-[#0d121b] dark:hover:text-white">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form method="GET" action="{{ route('visites.index') }}" class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-[#0d121b] dark:text-white mb-2">Sélectionner un motif</label>
+<select name="motif" class="w-full px-3 py-2 border border-[#e7ebf3] dark:border-[#2a3140] rounded-lg bg-white dark:bg-[#101622] text-[#0d121b] dark:text-white text-sm">
+<option value="">-- Tous les motifs --</option>
+<option value="Réunion" {{ request('motif') == 'Réunion' ? 'selected' : '' }}>Réunion</option>
+<option value="Visite client" {{ request('motif') == 'Visite client' ? 'selected' : '' }}>Visite client</option>
+<option value="Support technique" {{ request('motif') == 'Support technique' ? 'selected' : '' }}>Support technique</option>
+<option value="Audit" {{ request('motif') == 'Audit' ? 'selected' : '' }}>Audit</option>
+<option value="Formation" {{ request('motif') == 'Formation' ? 'selected' : '' }}>Formation</option>
+</select>
+</div>
+<div class="flex gap-2 pt-4">
+<button type="submit" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+Filtrer
+</button>
+<button type="button" onclick="closeModal('modalMotif')" class="flex-1 px-4 py-2 border border-[#e7ebf3] dark:border-[#2a3140] text-[#0d121b] dark:text-white rounded-lg font-medium hover:bg-[#f8f9fc] dark:hover:bg-[#101622] transition-colors">
+Annuler
+</button>
+</div>
+</form>
+</div>
+</div>
+
+<div id="modalPersonne" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50" onclick="closeModalOnBackdrop(event, 'modalPersonne')">
+<div class="bg-white dark:bg-[#181f2c] rounded-xl p-6 max-w-sm w-full mx-4" onclick="event.stopPropagation()">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold text-[#0d121b] dark:text-white">Filtrer par Personne rencontrée</h2>
+<button onclick="closeModal('modalPersonne')" class="text-[#4c669a] dark:text-[#a0aec0] hover:text-[#0d121b] dark:hover:text-white">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form method="GET" action="{{ route('visites.index') }}" class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-[#0d121b] dark:text-white mb-2">Rechercher une personne</label>
+<input type="text" name="personne_rencontree" value="{{ request('personne_rencontree') }}" placeholder="Nom ou prénom..." class="w-full px-3 py-2 border border-[#e7ebf3] dark:border-[#2a3140] rounded-lg bg-white dark:bg-[#101622] text-[#0d121b] dark:text-white text-sm">
+</div>
+<div class="flex gap-2 pt-4">
+<button type="submit" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+Filtrer
+</button>
+<button type="button" onclick="closeModal('modalPersonne')" class="flex-1 px-4 py-2 border border-[#e7ebf3] dark:border-[#2a3140] text-[#0d121b] dark:text-white rounded-lg font-medium hover:bg-[#f8f9fc] dark:hover:bg-[#101622] transition-colors">
+Annuler
+</button>
+</div>
+</form>
+</div>
+</div>
+
+<script>
+function openModal(modalId) {
+  document.getElementById(modalId).classList.remove('hidden');
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.add('hidden');
+}
+
+function closeModalOnBackdrop(event, modalId) {
+  if (event.target.id === modalId) {
+    closeModal(modalId);
+  }
+}
+</script>
 
 {{-- FORMULAIRE DE RECHERCHE --}}
 
@@ -197,16 +335,13 @@
 
 
 
-        {{-- Numéros des pages --}}
         @for ($page = 1; $page <= $visites->lastPage(); $page++)
 
-            {{-- Page active --}}
             @if ($page == $visites->currentPage())
                 <span class="flex size-10 items-center justify-center text-white rounded-lg bg-primary">
                     {{ $page }}
                 </span>
 
-            {{-- Autres pages --}}
             @else
                 <a href="{{ $visites->url($page) }}"
                    class="flex size-10 items-center justify-center hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140]">
@@ -218,15 +353,12 @@
 
 
 
-        {{-- Bouton suivant --}}
         @if ($visites->hasMorePages())
-            <!-- Aller à la page suivante -->
             <a href="{{ $visites->nextPageUrl() }}"
                class="flex size-10 items-center justify-center hover:bg-[#e7ebf3] dark:hover:bg-[#2a3140]">
                 <span class="material-symbols-outlined text-lg">chevron_right</span>
             </a>
         @else
-            <!-- Désactivé -->
             <span class="flex size-10 items-center justify-center opacity-40 cursor-default">
                 <span class="material-symbols-outlined text-lg">chevron_right</span>
             </span>

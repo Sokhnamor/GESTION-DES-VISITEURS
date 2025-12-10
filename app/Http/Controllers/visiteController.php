@@ -50,13 +50,44 @@ class VisiteController extends Controller
     }
 
    
-    public function index()
-{
-    // 5 visites par page (change le nombre si tu veux)
-    $visites = Visite::orderByDesc('created_at')->paginate(5);
-
-    return view('visites.historique', compact('visites'));
-}
+    public function index(Request $request)
+    {
+        // Récupérer les clients pour le dropdown
+        $clients = client::orderBy('nom')->get();
+        
+        // Initialiser la requête
+        $query = Visite::query();
+        
+        // Filtrer par client
+        if ($request->filled('client_id')) {
+            $query->where('client_id', $request->client_id);
+        }
+        
+        // Filtrer par date de début
+        if ($request->filled('date_debut')) {
+            $query->whereDate('created_at', '>=', $request->date_debut);
+        }
+        
+        // Filtrer par date de fin
+        if ($request->filled('date_fin')) {
+            $query->whereDate('created_at', '<=', $request->date_fin);
+        }
+        
+        // Filtrer par motif
+        if ($request->filled('motif')) {
+            $query->where('motif', $request->motif);
+        }
+        
+        // Filtrer par personne rencontrée
+        if ($request->filled('personne_rencontree')) {
+            $query->where('personne_rencontree', 'LIKE', '%' . $request->personne_rencontree . '%');
+        }
+        
+        // Paginer les résultats
+        $visites = $query->orderByDesc('created_at')->paginate(5);
+        
+        return view('visites.historique', compact('visites', 'clients'));
+    }
 
 
 
