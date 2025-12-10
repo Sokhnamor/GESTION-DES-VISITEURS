@@ -57,6 +57,12 @@
 </div>
 @yield('dashnav')
 <div class="flex flex-col gap-1">
+  <div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#e7ebf3] dark:hover:bg-primary/20 transition-colors" href="{{ route('connexion') }}">
+<span class="material-symbols-outlined text-[#0d121b] dark:text-white">logout</span>
+<p class="text-[#0d121b] dark:text-white text-sm font-medium leading-normal">Déconnexion</p>
+</a>
+</div>
 <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
 <span class="material-symbols-outlined text-gray-900 dark:text-white">settings</span>
 <p class="text-sm font-medium">Paramètres</p>

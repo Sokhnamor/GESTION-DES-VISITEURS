@@ -57,8 +57,10 @@
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
         <span class="block sm:inline">{{ session('error') }}</span>
     @endif
+    </div>
 <form action="{{route('connexionPost')}}" method="POST">
     @csrf
+    
     <p class="text-[#0d121b] dark:text-white/80 text-base font-medium leading-normal pb-2">Nom d'utilisateur ou email</p>
     <input name="email" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d121b] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#cfd7e7] dark:border-white/20 bg-[#f8f9fc] dark:bg-white/5 focus:border-primary h-14 placeholder:text-[#4c669a] dark:placeholder:text-white/40 p-[15px] text-base font-normal leading-normal" placeholder="Entrez votre nom d'utilisateur ou email" type="email" value="{{old('email')}}"/>
     </label>
