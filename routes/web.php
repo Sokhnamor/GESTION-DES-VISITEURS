@@ -56,3 +56,4 @@ Route::get('/visites/parametres', [VisiteController::class, 'parametres'])->name
 
 
 
+
